@@ -11,11 +11,15 @@ export default defineConfig({
       filename: "remoteEntry.js",
       exposes: {
         "./CatalogAdmin": "./src/App",
+        "./store": "./src/store"
       },
       shared: ["react", "react-dom"],
     }),
   ],
   build: {
+    modulePreload: false,
     target: "esnext",
+    minify: false,
+    cssCodeSplit: false,
   },
 });

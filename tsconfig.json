@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -7,8 +8,7 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -18,8 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "paths": {
+      "@apptypes/*": ["types/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@configur/*": ["config/*"],
+      "@pages/*": ["pages/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
