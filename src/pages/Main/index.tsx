@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 
 import { APIConfig } from "../../configs/api.config.constant";
 import { http } from "../../configs/axios.config";
-import { useToken } from "store";
+import { useAuthorized, useToken } from "store";
 
 export default function Main() {
   
   const [ catalogs, setCatalogs ] = useState([]);  
   const [ state ] = useToken();
+  const [ , setAuthorized ] = useAuthorized();
   
   async function fetchApi() {
     try {
@@ -17,7 +18,10 @@ export default function Main() {
       if (data) {
         setCatalogs(data)
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response.status == 401) {
+        setAuthorized(false)
+      }
       throw new Error(`Erro ao carregar catálogos: ${error}`);
     }
   }
