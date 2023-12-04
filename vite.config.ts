@@ -13,7 +13,7 @@ export default defineConfig({
         "./CatalogAdmin": "./src/App",
         "./store": "./src/store"
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "jotai"],
     }),
   ],
   build: {
