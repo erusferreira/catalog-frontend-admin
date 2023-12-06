@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 
 import { APIConfig } from "../../configs/api.config.constant";
 import { http } from "../../configs/axios.config";
-import { useAuthorized, useAdminToken, useAdminUserMerchant} from "store";
+import { useAdminAuthorized, useAdminToken, useAdminUserMerchant} from "store";
 
 export default function Main() {
   
   const [ catalogs, setCatalogs ] = useState([]);  
   const [ token ] = useAdminToken();
   const [ merchant ] = useAdminUserMerchant();
-  const [ , setAuthorized ] = useAuthorized();
+  const [ , setAuthorized ] = useAdminAuthorized();
 
   async function fetchApi() {
     try {
