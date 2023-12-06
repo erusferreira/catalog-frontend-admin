@@ -32,18 +32,20 @@ export default function Main() {
   
   return (
     <>
-      <section className="bg-light-gray h-height w-screen flex m-auto">
+      <section className="bg-light-gray h-height w-screen flex m-auto justify-center">
         {catalogs.map((catalog: any) => (
-          <div className="bg-white m-3.5 w-6/12 shadow-box-shadow grid justify-items-center">
+          <div className="bg-white m-3.5 mt-12 w-6/12 shadow-box-shadow grid justify-items-center p-2 h-fit max-w-xs">
               <div key={catalog._id}
                    className="">
-                <img className="my-3.5"
+                <img className="max-h-80"
                      src="https://images.unsplash.com/photo-1555982105-d25af4182e4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80"
                 />
-                <div className="pt-3 flex items-center justify-between">
-                  <p className="">{catalog.name}</p>
+                <div className="m-1.5">
+                  <div className="flex items-center justify-between font-bold text-xl">
+                    <p className="">{catalog.name}</p>
+                  </div>
+                  <p className="pt-1 text-gray-900">{catalog.description}</p>
                 </div>
-                <p className="pt-1 text-gray-900">{catalog.description}</p>
               </div>
           </div>
         ))}
