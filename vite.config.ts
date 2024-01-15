@@ -13,10 +13,16 @@ export default defineConfig({
         "./CatalogAdmin": "./src/App",
         "./store": "./src/store"
       },
-      shared: ["react", "react-dom", "jotai"],
+      shared: [
+        "react",
+        "react-dom",
+        "jotai",
+        "react-router-dom"
+      ],
     }),
   ],
   build: {
+    outDir: 'admin',
     modulePreload: false,
     target: "esnext",
     minify: false,
