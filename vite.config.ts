@@ -17,7 +17,8 @@ export default defineConfig({
         "react",
         "react-dom",
         "jotai",
-        "react-router-dom"
+        "react-router-dom",
+        "tailwindcss"
       ],
     }),
   ],
