@@ -10,4 +10,6 @@ export interface AppAPIConfig {
 
 export interface ApiConfigInterface {
   CATALOG: AppAPIConfig;
+  CATEGORY: AppAPIConfig;
+  ITEM: AppAPIConfig;
 }

@@ -16,10 +16,7 @@ export default function Main() {
     try {
       const lsService = localStorageService();
       const inMemoryUser = lsService.getToken('user');
-
       const url = APIConfig.CATALOG.GET(inMemoryUser.merchant);
-      
-
       const { data } = await http.get(url, { headers: { Authorization: inMemoryUser.token }});
       
       if (data) {
@@ -39,7 +36,7 @@ export default function Main() {
   
   return (
     <>
-      <section onClick={() => navigate('detail')} className="bg-light-gray h-height w-screen flex m-auto justify-center cursor-pointer">
+      <section onClick={() => navigate('list')} className="bg-light-gray h-height w-screen flex m-auto justify-center cursor-pointer">
         {catalogs.map((catalog: any) => (
           <div key={catalog._id}
                className="bg-white m-3.5 mt-12 w-6/12 shadow-box-shadow grid justify-items-center p-2 h-fit max-w-xs">

@@ -28,6 +28,7 @@ for (const path of Object.keys(pages)) {
     ErrorBoundary: element?.ErrorBoundary
   }
   routes.push(object);
+  console.log('Routes: ',routes);
 }
 
 export default routes;
