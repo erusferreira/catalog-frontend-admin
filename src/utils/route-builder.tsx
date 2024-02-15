@@ -8,7 +8,7 @@ type objectType = {
   ErrorBoundary: string;
 }
 
-const routes: any = [];
+const routesData: any = [];
 
 for (const path of Object.keys(pages)) {
   const fileName = path.match(/\.\/pages\/(.*)\.tsx$/)?.[1];
@@ -27,8 +27,7 @@ for (const path of Object.keys(pages)) {
     action: element?.action,
     ErrorBoundary: element?.ErrorBoundary
   }
-  routes.push(object);
-  console.log('Routes: ',routes);
+  routesData.push(object);
 }
 
-export default routes;
+export default routesData;

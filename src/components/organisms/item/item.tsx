@@ -9,7 +9,7 @@ import {
   StyledButton
 } from './styled';
 
-import { ItemInterface } from '../../types/item';
+import { ItemInterface } from '../../../types/item';
 
 export type ItemProps = {
   entity: ItemInterface
