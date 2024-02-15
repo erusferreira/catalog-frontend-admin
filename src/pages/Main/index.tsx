@@ -11,26 +11,25 @@ export default function Main() {
   
   const [ catalogs, setCatalogs ] = useState([]);  
   const [ , setAuthorized ] = useAdminAuthorized();
-
-  async function fetchApi() {
-    try {
-      const lsService = localStorageService();
-      const inMemoryUser = lsService.getToken('user');
-      const url = APIConfig.CATALOG.GET(inMemoryUser.merchant);
-      const { data } = await http.get(url, { headers: { Authorization: inMemoryUser.token }});
-      
-      if (data) {
-        setCatalogs(data)
-      }
-    } catch (error: any) {
-      if (error.response.status == 401) {
-        setAuthorized(false)
-      }
-      throw new Error(error);
-    }
-  }
   
   useEffect(() => {
+    async function fetchApi() {
+      try {
+        const lsService = localStorageService();
+        const inMemoryUser = lsService.getToken('user');
+        const url = APIConfig.CATALOG.GET(inMemoryUser.merchant);
+        const { data } = await http.get(url, { headers: { Authorization: inMemoryUser.token }});
+        
+        if (data) {
+          setCatalogs(data)
+        }
+      } catch (error: any) {
+        if (error.response.status == 401) {
+          setAuthorized(false)
+        }
+        throw new Error(error);
+      }
+    }
     fetchApi();
   }, []);
   
