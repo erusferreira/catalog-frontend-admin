@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
+import { useAdminAuthorized } from "store";
 import { APIConfig } from "../../configs/api.config.constant";
-import { http } from "../../configs/axios.config";
-import { localStorageService } from "../../services/localstorage-service";
+import { http } from "../../configs/api.interceptor";
 import { Item } from '../../components/organisms/item/item';
 import { ListInterface } from '../../types/list';
 import {
@@ -15,29 +15,27 @@ import {
 export default function Detail() {
 
   const [ list, setList ] = useState<ListInterface[]>([]);
+  const [ , setAuthorized ] = useAdminAuthorized();
 
   useEffect(() => {
     async function fetchCategories() {
-      try {
-        const lsService = localStorageService();
-        const inMemoryUser = lsService.getToken('user');
-  
+      try {       
         const url = APIConfig.CATEGORY.GET_ALL();
-        const { data } = await http.get(url, { headers: { Authorization: inMemoryUser.token }});
+        const data = await http.get(url);
         
         if (data) {
           const list: ListInterface[] = [];
           for await (const category of data) {
             const urlItemByCategory = APIConfig.ITEM.GET(category._id);
-            const { data } = await http.get(urlItemByCategory, { headers: { Authorization: inMemoryUser.token }});
+            const data = await http.get(urlItemByCategory);
             list.push({ ...category, items: data });
           }
           setList(list);
         }
-        
-        
       } catch (error: any) {
-        throw new Error(error);
+        if (error.response.status == 401) {
+          setAuthorized(false);
+        }
       }
     }
     fetchCategories();

@@ -1,16 +1,16 @@
 export const localStorageService = () => {
   
-  const setToken = (key: string, value: unknown): void => {
+  const setData = (key: string, value: unknown): void => {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  const getToken = (key: string) => {
-    if (isTokenSaved(key)) {
+  const getData = (key: string) => {
+    if (isDataSaved(key)) {
       return JSON.parse(localStorage.getItem(key) || '');
     }
   }
 
-  const isTokenSaved = (key: string): boolean => {
+  const isDataSaved = (key: string): boolean => {
     return !!(localStorage.getItem(key) && localStorage.getItem(key) !== null);
   }
 
@@ -19,9 +19,9 @@ export const localStorageService = () => {
   }
 
   return {
-    setToken, 
-    getToken,
-    isTokenSaved, 
+    setData, 
+    getData,
+    isDataSaved, 
     clear
   }
 }

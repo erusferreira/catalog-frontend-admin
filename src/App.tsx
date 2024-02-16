@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Routes } from "./routes";
+import { UserProvider } from "context/user";
 
 function App() {
   return (
-    <Routes />
+    <UserProvider>
+      <Routes />
+    </UserProvider>
   );
 }
 

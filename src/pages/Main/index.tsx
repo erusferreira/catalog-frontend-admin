@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAdminAuthorized } from "store";
 
 import { APIConfig } from "../../configs/api.config.constant";
-import { http } from "../../configs/axios.config";
+import { http } from "../../configs/api.interceptor";
 import { localStorageService } from "../../services/localstorage-service";
 
 export default function Main() {
@@ -16,18 +16,25 @@ export default function Main() {
     async function fetchApi() {
       try {
         const lsService = localStorageService();
-        const inMemoryUser = lsService.getToken('user');
-        const url = APIConfig.CATALOG.GET(inMemoryUser.merchant);
-        const { data } = await http.get(url, { headers: { Authorization: inMemoryUser.token }});
+        const isUserAuthenticated = lsService.isDataSaved('user');
+
+        if (!isUserAuthenticated) {
+          setAuthorized(false);
+          return;
+        }
+
+        const merchant = lsService.getData('user').merchant;
+
+        const url = APIConfig.CATALOG.GET(merchant);
+        const data = await http.get(url);
         
         if (data) {
           setCatalogs(data)
         }
       } catch (error: any) {
-        if (error.response.status == 401) {
-          setAuthorized(false)
+        if (error.response?.status == 401) {
+          setAuthorized(false);
         }
-        throw new Error(error);
       }
     }
     fetchApi();
