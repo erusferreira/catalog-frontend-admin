@@ -5,14 +5,10 @@ export const StyledName = styled.h3`
   font-weight: bold;
 `
 
-export const StyledImage = styled.img`
-  width: 30px;
-  height: 30px;
+export const StyledImage = styled.div`
+  width: 35px;
+  height: 35px;
 `
-
-StyledImage.defaultProps = {
-  src: '/src/assets/box.png',
-};
 
 export const StyledDescription = styled.p`
   font-size: 14px;
